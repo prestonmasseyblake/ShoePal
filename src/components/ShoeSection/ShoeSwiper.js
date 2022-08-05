@@ -47,8 +47,8 @@ const ShoeSwiper = ({ addCart, shoeArr }) => {
           id="customSwiper"
           breakpoints={{
             // when window width is >= 640px
-            200: {
-              width: 200,
+            350: {
+              width: 350,
               slidesPerView: 2,
             },
             420: {
