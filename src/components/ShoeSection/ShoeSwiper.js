@@ -47,6 +47,10 @@ const ShoeSwiper = ({ addCart, shoeArr }) => {
           id="customSwiper"
           breakpoints={{
             // when window width is >= 640px
+            200: {
+              width: 200,
+              slidesPerView: 2,
+            },
             420: {
               width: 420,
               slidesPerView: 2,
@@ -67,16 +71,21 @@ const ShoeSwiper = ({ addCart, shoeArr }) => {
           }}
           onSlideChange={() => console.log("slide change")}
           onSwiper={(swiper) => console.log(swiper)}
-            >
-                {shoeArr.map((i) => {
-                    return (
-                        <SwiperSlide key={i.id}>
-                            <ShoeCard Shoe={i} addShoe={addCart} name={i.title} price={i.price} image={i.image} color={i.color}  />
-                        </SwiperSlide>
-                    );
-                })}
-         
-         
+        >
+          {shoeArr.map((i) => {
+            return (
+              <SwiperSlide key={i.id}>
+                <ShoeCard
+                  Shoe={i}
+                  addShoe={addCart}
+                  name={i.title}
+                  price={i.price}
+                  image={i.image}
+                  color={i.color}
+                />
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
       </div>
     );
