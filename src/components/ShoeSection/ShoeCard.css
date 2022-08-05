@@ -1,0 +1,14 @@
+.shoe-card {
+    width: 153px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+
+}
+
+.shoe-card-image {
+    width: 143px;
+    height: 143px;
+}
