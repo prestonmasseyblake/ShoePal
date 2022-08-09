@@ -1,6 +1,7 @@
 import React from 'react'
 import FedexLogo from "../../assets/Fedex-Express-Logo.png"
-const ShippingCard = ({ title, toggleFunc, delivery, logo, price, toggle }) => {
+import DHLLogo from "../../assets/dhl-express.png"
+const ShippingCard = ({ title, toggleFunc, delivery, logo, price, toggle, toggleIcon}) => {
     const checkToggleClick = () => {
         if (!toggle) {
             toggleFunc()
@@ -15,7 +16,11 @@ const ShippingCard = ({ title, toggleFunc, delivery, logo, price, toggle }) => {
         } cursor-pointer`}
       >
         <div className="logo-div">
-          <img className="h-4" src={FedexLogo} alt={FedexLogo} />
+          {toggleIcon ?
+            <img className="h-3" src={FedexLogo} alt={FedexLogo} /> :
+            <img className="h-8" src={DHLLogo} alt={DHLLogo} />
+          }
+            
         </div>
         <div className="info-div flex-1 ml-4">
           <div>

@@ -3,12 +3,16 @@ import PaymentContainer from './PaymentSection/PaymentContainer'
 import ShoeContainer from './ShoeSection/ShoeContainer'
 import SummaryContainer from './SummarySection/SummaryContainer'
 import { Shoe } from "../utils/Shoe";
+import ShoePalLogo from "../assets/shoePalLogo.png";
 import "./Container.css"
+import Modal from './Modal';
 
 const Container = () => {
-    const [pretotal, setPreTotal] = useState(0.00);
+  const [pretotal, setPreTotal] = useState(0.00);
+  const [openModal, setOpenModal] = useState(false);
   let shoesArray = [];
   const [cart, setCart] = useState([]);
+
 
   const addCart = (item) => {
     console.log("added item: ",item)
@@ -20,6 +24,51 @@ const Container = () => {
     setPreTotal(pretotal + item.price);
   
   }
+
+  const incAddCart = (id) => {
+    console.log("this is id in add:",id)
+    let idx = -1
+    let items = { ...cart }
+    console.log('itmm',items)
+    for (let i = 0; i < items.length; i++){
+      console.log(items[i].items.id);
+    //   if (id === items[0].items[i].id) {
+    //     idx = i;
+    //     console.log("setting idx to:", idx)
+    //     break;
+    //     }
+    }
+    // console.log("this is the items state", {items})
+    // // items[idx].amount++;
+    // setCart(items);
+  }
+
+  const removeCart = (id) => {
+    let idx = -1;
+    let items = { ...cart };
+    for (let i = 0; i < items.length; i++) {
+      if (id === items[i].id) {
+        idx = i;
+        break;
+      }
+    }
+    items.splice(idx, 1);
+    setCart(items);
+  }
+
+  const incDecrCart = (id) => {
+    let idx = -1;
+    let items = { ...cart };
+    for (let i = 0; i < items.length; i++) {
+      if (id === items[i].id) {
+        idx = i;
+        break;
+      }
+    }
+    
+    items[idx].amount -= 1;
+    setCart(items);
+  };
 
   const shoe1 = Shoe(
     333333,
@@ -69,29 +118,54 @@ const Container = () => {
   shoesArray.push(shoe4);
   shoesArray.push(shoe5);
   shoesArray.push(shoe6);
+  const toggleModal = () => {
+    setOpenModal(!openModal);
+  }
     useEffect(() => { 
     }, [])
-  return (<>
-      <div className="about-container rounded-md flex justify-center items-center cursor-pointer">
-      <p className="text-white font-bold text-xl">?</p>
+  return (
+    <>
+      {openModal ? <Modal toggleModal={toggleModal} /> : null}
+      <div className="logo-large-container hidden xl:block">
+        <img src={ShoePalLogo} className="w-64" />
+      </div>
+      <div
+        onClick={toggleModal}
+        className="about-container rounded-md hidden xl:flex justify-center items-center cursor-pointer "
+      >
+        <p className="text-white font-bold text-xl">?</p>
       </div>
       <div className="bg-[#F1F1F0] w-full max-w-5xl h-64 mx-auto rounded-lg drop-shadow-xl ">
+        <div className="flex justify-between bg-[#FFF]  xl:hidden">
+          <div>
+            <img src={ShoePalLogo} className="w-64" />
+          </div>
+          <div
+            onClick={toggleModal}
+            className="bg-[#000] w-16  flex justify-center items-center cursor-pointer"
+          >
+            <p className="text-white font-bold text-xl">?</p>
+          </div>
+        </div>
         <div className="border-b-2 ">
-        <ShoeContainer addCart={addCart} shoeArr={shoesArray} />
+          <ShoeContainer addCart={addCart} shoeArr={shoesArray} />
         </div>
         <div className="flex flex-col md:flex-row">
           <div className=" md:w-2/4 ">
-          <SummaryContainer setPreTotal={setPreTotal}
-            pretotal={pretotal}
-            cartArr={cart} />
+            <SummaryContainer
+              incAddCart={incAddCart}
+              setPreTotal={setPreTotal}
+              pretotal={pretotal}
+              cartArr={cart}
+            />
           </div>
           <div className="md:w-2/4">
-          <PaymentContainer pretotal={pretotal} />
+            <PaymentContainer pretotal={pretotal} />
           </div>
         </div>
       </div>
-      </>
-    );
+    </>
+  );
 }
 
 export default Container

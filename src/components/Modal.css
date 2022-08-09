@@ -1,0 +1,14 @@
+.modal-background {
+margin-top: 200px;
+    position: absolute;
+    z-index: 1000;
+    height: 10000px;
+  
+
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.close-logo {
+    position: absolute;
+    right: 10px;
+}
