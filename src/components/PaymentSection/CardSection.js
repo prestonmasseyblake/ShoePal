@@ -116,7 +116,7 @@ const CardSection = ({ pretotal }) => {
                 />
               </div>
 
-              <div className="h-full p-4 flex justify-center items-center border-l-2 w-18">
+              <div className="h-full px-4 flex justify-center items-center border-l-2 w-18">
                 <input
                   onChange={(e) => {
                     setCardPin(e.target.value);
