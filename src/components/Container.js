@@ -6,10 +6,12 @@ import { Shoe } from "../utils/Shoe";
 import ShoePalLogo from "../assets/shoePalLogo.png";
 import "./Container.css"
 import Modal from './Modal';
+import ThankyouModal from './ThankyouModal';
 
 const Container = () => {
   const [pretotal, setPreTotal] = useState(0.00);
   const [openModal, setOpenModal] = useState(false);
+  const [thankyouModal, setthankyouModal] = useState(false);
   let shoesArray = [];
   const [cart, setCart] = useState([]);
 
@@ -127,10 +129,14 @@ const Container = () => {
   const toggleModal = () => {
     setOpenModal(!openModal);
   }
+  const toggleThankyou = () => {
+  setthankyouModal(true);
+}
     useEffect(() => { 
     }, [])
   return (
     <>
+      {thankyouModal ? <ThankyouModal /> : null}
       {openModal ? <Modal toggleModal={toggleModal} /> : null}
       <div className="logo-large-container hidden xl:block">
         <img src={ShoePalLogo} className="w-64" />
@@ -168,7 +174,10 @@ const Container = () => {
             />
           </div>
           <div className="md:w-2/4">
-            <PaymentContainer pretotal={pretotal} />
+            <PaymentContainer
+              toggleThankyou={toggleThankyou}
+              pretotal={pretotal}
+            />
           </div>
         </div>
       </div>

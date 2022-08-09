@@ -40,14 +40,18 @@ const Modal = ({ toggleModal }) => {
           or accurate.
         </p>
         <div className="w-full flex justify-start my-4">
-          <button className="bg-[#FFF] text-black shadow-md mx-2 px-2 py-2 flex items-center justify-center rounded-md font-bold">
+          <a
+              href="https://github.com/prestonmasseyblake/ShoePal"
+              target="_blank" className="bg-[#FFF] text-black shadow-md mx-2 px-2 py-2 flex items-center justify-center rounded-md font-bold" rel="noreferrer">
                         <FaGithub/>
                       View On Github
-          </button>
-                  <button className="bg-[#FFF] flex shadow-md justify-center items-center text-black mx-2 px-2 py-2 rounded-md font-bold">
+          </a>
+                  <a
+              href="https://www.prestonmblake.com/fullstack"
+              target="_blank" className="bg-[#FFF] flex shadow-md justify-center items-center text-black mx-2 px-2 py-2 rounded-md font-bold">
                       <MdWeb/>
             Website
-          </button>
+          </a>
         </div>
       </div>
     </div>
