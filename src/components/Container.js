@@ -28,46 +28,52 @@ const Container = () => {
   const incAddCart = (id) => {
     console.log("this is id in add:",id)
     let idx = -1
-    let items = { ...cart }
+    let items = [...cart]
     console.log('itmm',items)
     for (let i = 0; i < items.length; i++){
-      console.log(items[i].items.id);
-    //   if (id === items[0].items[i].id) {
-    //     idx = i;
-    //     console.log("setting idx to:", idx)
-    //     break;
-    //     }
+      console.log("looper", items[i]["item"].id);
+        if (id === items[i]["item"].id) {
+          idx = i;
+          console.log("setting idx to:", idx)
+          break;
+          }
     }
-    // console.log("this is the items state", {items})
-    // // items[idx].amount++;
-    // setCart(items);
+    setPreTotal(pretotal + items[idx]["item"].price);
+    items[idx]["amount"]++;
+    setCart(items);
   }
 
   const removeCart = (id) => {
     let idx = -1;
-    let items = { ...cart };
+    let items = [...cart ];
     for (let i = 0; i < items.length; i++) {
-      if (id === items[i].id) {
+      if (id === items[i]["item"].id) {
         idx = i;
         break;
       }
     }
+    setPreTotal(pretotal - items[idx]["item"].price * items[idx]["amount"]);
     items.splice(idx, 1);
     setCart(items);
   }
 
   const incDecrCart = (id) => {
     let idx = -1;
-    let items = { ...cart };
+    let items = [...cart];
     for (let i = 0; i < items.length; i++) {
-      if (id === items[i].id) {
+      if (id === items[i]["item"].id) {
         idx = i;
         break;
       }
     }
-    
-    items[idx].amount -= 1;
-    setCart(items);
+    if (items[idx].amount > 1) {
+      items[idx].amount -= 1;
+      setCart(items);
+      setPreTotal(pretotal - items[idx]["item"].price );
+    }
+    else {
+      removeCart(id);
+    }
   };
 
   const shoe1 = Shoe(
@@ -153,7 +159,9 @@ const Container = () => {
         <div className="flex flex-col md:flex-row">
           <div className=" md:w-2/4 ">
             <SummaryContainer
+              removeCart={removeCart}
               incAddCart={incAddCart}
+              incDecrCart={incDecrCart}
               setPreTotal={setPreTotal}
               pretotal={pretotal}
               cartArr={cart}
